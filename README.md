@@ -1,88 +1,37 @@
-# ENEM Data Hub
+# enem-data-hub
 
-A modular Python toolkit for downloading, extracting, cleaning, and sampling microdata from the Brazilian **ENEM** (Exame Nacional do Ensino Médio) exams, published by **INEP**.
+**Ferramenta para baixar, extrair e processar microdados do ENEM (INEP)** — pipeline ETL completo para dados educacionais brasileiros.
 
-## Features
+## 🎯 Objetivo
 
-- **Download** — Fetch ZIP files directly from INEP's official servers with progress bars and automatic retries
-- **Extract** — Unpack CSV files from ZIP archives, handling INEP's standard encoding and separators
-- **Clean** — Remove useless columns, standardize data types, and handle missing values
-- **Sample** — Create reduced datasets for fast testing and development
-- **CLI** — Single entry point to orchestrate the full pipeline
+Disponibilizar dados do ENEM de forma limpa, estruturada e pronta para análise — desde o download dos arquivos originais do INEP até datasets prontos para consumo.
 
-## Installation
+## 🔧 Stack
 
-```bash
-git clone https://github.com/yourusername/enem-data-hub.git
-cd enem-data-hub
-pip install -r requirements.txt
-```
+- **Python** — pandas, requests, zipfile
+- **ETL Pipeline** — extract → transform → load
+- **Output** — CSV, Parquet, SQLite
 
-## Usage
-
-### Download microdata for specific years
-
-```bash
-python enem_hub.py --ano 2023 2024 --baixar
-```
-
-### Download, extract, clean, and create a sample
-
-```bash
-python enem_hub.py --ano 2023 --baixar --extrair --limpar --amostra 10000
-```
-
-### Process all available years at once
-
-```bash
-python enem_hub.py --all --baixar --extrair
-```
-
-### List supported years
-
-```bash
-python enem_hub.py --list-years
-```
-
-## Directory Structure
+## 🚀 Pipeline
 
 ```
-enem-data-hub/
-├── enem_hub.py          # CLI entry point
-├── downloader.py        # HTTP download with retry logic
-├── extractor.py         # ZIP extraction for INEP microdata format
-├── cleaner.py           # Data cleaning pipeline
-├── sampler.py           # Random sampling for quick testing
-├── models.py            # Data classes: Candidato, Escola, Notas
-├── config.py            # URLs, paths, and configuration constants
-├── requirements.txt     # Python dependencies
-├── .gitignore
-├── README.md
-└── notas.md             # Personal development notes
+Download INEP → Extração ZIP → Parse CSV → Limpeza → Feature Engineering → Export
 ```
 
-## Data Format Notes
+## 📊 Dados Disponíveis
 
-- INEP distributes microdata as ZIP files containing CSV files
-- CSVs use `;` (semicolon) as separator and `latin1` encoding
-- The CSV structure changed in **2020** — compatibility checks are in place
-- INEP updates download URLs periodically; `config.py` centralizes URL management
+- Microdados completos por ano
+- Notas por competência
+- Perfil socioeconômico
+- Dados de localidade (escola, município)
 
-## Supported Years
+## 💡 Casos de Uso
 
-| Range | Status |
-|-------|--------|
-| 2009–2025 | Supported (configurable in `config.py`) |
+- Análise de desempenho por região
+- Machine Learning — predição de notas
+- Dashboard educacional
+- Pesquisas acadêmicas
 
-## Requirements
+---
 
-- Python 3.10+
-- requests, tqdm, pandas, numpy, colorama
-
-## License
-
-MIT
-
-## Author
-
-👤 **Author** — **Guilherme Crepaldi**
+> Projeto open source. Contribuições bem-vindas.
